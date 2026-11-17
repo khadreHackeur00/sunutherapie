@@ -279,7 +279,7 @@
 
 <div class="jm">
   <div class="jm-in">
-    <img class="jm-aff" src="/images/parcours/affiche-joj-health-labs.webp" alt="Affiche des Health Labs de l'OMS aux JOJ Dakar 2026">
+    <img class="jm-aff" src="/images/parcours/affiche-joj-health-labs-v2.webp" alt="Affiche des Health Labs de l'OMS aux JOJ Dakar 2026">
     <div class="jm-txt">
       <span class="jm-tag">Dernière actualité · JOJ Dakar 2026 · 2-6 novembre</span>
       <p class="jm-theme">Les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse</p>
@@ -324,7 +324,7 @@
       </div>
     </div>
     <figure class="hero-aff">
-      <img src="/images/parcours/affiche-joj-health-labs.webp" alt="Affiche : les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse Dakar 2026, avec SunuThérapie comme partenaire numérique">
+      <img src="/images/parcours/affiche-joj-health-labs-v2.webp" alt="Affiche : les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse Dakar 2026, avec SunuThérapie comme partenaire numérique">
       <figcaption>Health Labs de l'OMS &middot; JOJ Dakar 2026</figcaption>
     </figure>
   </div>
