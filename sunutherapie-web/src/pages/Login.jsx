@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 
+const PARTENAIRES = [
+  { src: '/partenaires/amref.png', nom: 'AMREF Health Africa' },
+  { src: '/partenaires/mastercard.png', nom: 'Fondation Mastercard' },
+  { src: '/partenaires/ucad.png', nom: 'Université Cheikh Anta Diop de Dakar' },
+  { src: '/partenaires/oms.png', nom: 'Organisation mondiale de la Santé' },
+  { src: '/partenaires/mshp.png', nom: "Ministère de la Santé et de l'Hygiène publique" },
+];
+
 function Aside() {
   return (
     <aside className="auth-aside">
@@ -9,6 +17,12 @@ function Aside() {
       <h1 className="serif">Votre bien-être mental, notre priorité</h1>
       <p>Consultez vos rendez-vous, lisez les ressources partagées par votre psychothérapeute et échangez avec la communauté, depuis votre navigateur.</p>
       <p className="note">Rejoignez vos consultations vidéo directement depuis votre navigateur ou depuis l'application mobile SunuThérapie.</p>
+      <div className="partenaires">
+        <span className="partenaires-titre">Nos partenaires</span>
+        <div className="partenaires-logos">
+          {PARTENAIRES.map((p) => <img key={p.src} src={p.src} alt={p.nom} title={p.nom} />)}
+        </div>
+      </div>
     </aside>
   );
 }
