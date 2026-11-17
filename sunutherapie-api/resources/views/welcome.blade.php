@@ -279,13 +279,13 @@
 
 <div class="jm">
   <div class="jm-in">
-    <img class="jm-aff" src="/images/parcours/affiche-10-octobre.webp" alt="Affiche de la Journée mondiale de la santé mentale, 10 octobre">
+    <img class="jm-aff" src="/images/parcours/affiche-joj-health-labs.webp" alt="Affiche des Health Labs de l'OMS aux JOJ Dakar 2026">
     <div class="jm-txt">
-      <span class="jm-tag">10 octobre · Journée mondiale de la santé mentale</span>
-      <p class="jm-theme">« Des expériences vécues entendues : des voix réelles, un changement réel »</p>
-      <p class="jm-org">Ministère de la Santé et de l'Hygiène Publique — Division Santé Mentale, en partenariat avec l'OMS et SunuThérapie</p>
+      <span class="jm-tag">Dernière actualité · JOJ Dakar 2026 · 2-6 novembre</span>
+      <p class="jm-theme">Les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse</p>
+      <p class="jm-org">OMS Sénégal — SunuThérapie, partenaire numérique : 21 stations digitales, plus de 850 jeunes au Lab Santé mentale</p>
     </div>
-    <a href="#parcours" class="jm-cta">Notre engagement</a>
+    <a href="#parcours" class="jm-cta">En savoir plus</a>
   </div>
 </div>
 
@@ -324,8 +324,8 @@
       </div>
     </div>
     <figure class="hero-aff">
-      <img src="/images/parcours/affiche-10-octobre.webp" alt="Affiche officielle de la Journée mondiale de la santé mentale du 10 octobre, Ministère de la Santé et de l'Hygiène Publique, Division Santé Mentale, en partenariat avec l'OMS">
-      <figcaption>Journée mondiale de la santé mentale &middot; 10 octobre</figcaption>
+      <img src="/images/parcours/affiche-joj-health-labs.webp" alt="Affiche : les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse Dakar 2026, avec SunuThérapie comme partenaire numérique">
+      <figcaption>Health Labs de l'OMS &middot; JOJ Dakar 2026</figcaption>
     </figure>
   </div>
 </section>
