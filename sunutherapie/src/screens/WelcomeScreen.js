@@ -4,16 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing, radius, shadows } from '../config/theme';
 
-// Logos partenaires affichés en bas de la page.
-// img: null => emplacement texte (placeholder) en attendant le fichier.
-// Pour activer OMS / MHSP-DMS : dépose oms.png et mhsp.png (fond transparent)
-// dans assets/images/ puis remplace null par require('../../assets/images/xxx.png').
+// Logos partenaires : même hauteur pour tous, la largeur suit le ratio de chaque fichier.
+const LOGO_H = 30;
 const PARTNERS = [
-  // Dépose oms.png et mhsp.png (PNG fond transparent) dans assets/images/,
-  // puis dé-commente les deux lignes ci-dessous :
-  // { key: 'oms', label: 'OMS', img: require('../../assets/images/oms.png') },
-  // { key: 'mhsp', label: 'MHSP/DMS', img: require('../../assets/images/mhsp.png') },
-  { key: 'ucad', label: 'UCAD', img: require('../../assets/images/Logoucad.png') },
+  { key: 'ucad', label: 'UCAD', img: require('../../assets/images/Logoucad.png'), ratio: 1 },
+  { key: 'oms', label: 'Organisation mondiale de la Santé', img: require('../../assets/images/oms.png'), ratio: 3.62 },
+  { key: 'mshp', label: "Ministère de la Santé et de l'Hygiène publique", img: require('../../assets/images/mshp.png'), ratio: 3.84 },
 ];
 
 export default function WelcomeScreen({ navigation }) {
@@ -59,11 +55,13 @@ export default function WelcomeScreen({ navigation }) {
 
       <View style={styles.footer}>
         <Text style={styles.partnersLabel}>Avec le soutien de</Text>
-        <View style={styles.logoRow}>
-          {PARTNERS.filter((p) => p.img).map((p) => (
-            <View key={p.key} style={styles.logoBox}>
-              <Image source={p.img} style={styles.logoImg} resizeMode="contain" />
-            </View>
+        <View style={styles.logoStrip}>
+          {PARTNERS.map((p, i) => (
+            <React.Fragment key={p.key}>
+              {i > 0 ? <View style={styles.logoDivider} /> : null}
+              <Image source={p.img} style={{ height: LOGO_H, width: Math.round(LOGO_H * p.ratio) }}
+                     resizeMode="contain" accessibilityLabel={p.label} />
+            </React.Fragment>
           ))}
         </View>
         <Text style={styles.footerText}>Financé par AMREF Health Africa & Fondation Mastercard</Text>
@@ -97,12 +95,12 @@ const styles = StyleSheet.create({
     fontSize: 11, fontWeight: '700', color: colors.textFaint,
     letterSpacing: 0.5, textTransform: 'uppercase', marginBottom: spacing.md,
   },
-  logoRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: spacing.md, marginBottom: spacing.md },
-  logoBox: {
-    height: 60, minWidth: 80, paddingHorizontal: spacing.md, backgroundColor: colors.surface,
-    borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center',
+  logoStrip: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch',
+    backgroundColor: colors.surface, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border,
+    paddingVertical: spacing.md, paddingHorizontal: spacing.md, marginBottom: spacing.md,
   },
-  logoImg: { width: 56, height: 44 },
+  logoDivider: { width: 1, height: 24, backgroundColor: colors.border, marginHorizontal: spacing.md },
   logoPlaceholder: { fontSize: 13, fontWeight: '700', color: colors.textMuted },
   footerText: { fontSize: 11, color: colors.textFaint, textAlign: 'center' },
 });
