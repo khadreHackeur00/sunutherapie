@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as api from '../lib/api';
 import { Skeletons, Empty, Modal, initials, heure } from '../components/ui';
+import { sousTitrePsy } from '../lib/psy';
 
 const aujourdhui = () => new Date().toISOString().slice(0, 10);
 
@@ -45,7 +46,7 @@ export default function RendezVous() {
                     <div className="av">{initials(nom)}</div>
                     <div className="bd">
                       <div className="t">{nom}</div>
-                      <div className="s">{p.specialite || p.structure || 'Psychothérapeute'}</div>
+                      <div className="s">{sousTitrePsy(p)}</div>
                     </div>
                   </div>
                   {p.presentation ? (

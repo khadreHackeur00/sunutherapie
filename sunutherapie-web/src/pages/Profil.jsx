@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as api from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { initials } from '../components/ui';
+import { specialitesPsy } from '../lib/psy';
 
 export default function Profil() {
   const { user, refresh, signOut } = useAuth();
@@ -46,7 +47,7 @@ export default function Profil() {
     <>
       <div className="page-head">
         <h1 className="serif">Mon profil</h1>
-        <p>Vos informations personnelles et votre inscription universitaire.</p>
+        <p>{estPsy ? 'Vos informations personnelles et votre exercice.' : 'Vos informations personnelles et votre inscription universitaire.'}</p>
       </div>
 
       <div className="card">
@@ -67,8 +68,8 @@ export default function Profil() {
         <div className="card-h"><h2>{estPsy ? 'Exercice' : 'Scolarité'}</h2></div>
         {estPsy ? (
           <>
-            <Ligne label="Spécialité" valeur={psy.specialite} />
-            <Ligne label="Structure" valeur={psy.structure} />
+            <Ligne label="Spécialité" valeur={specialitesPsy(psy)} />
+            <Ligne label="Structure" valeur={psy.etablissement} />
             <Ligne label="Numéro d'ordre" valeur={psy.numero_ordre} />
             <Ligne label="Années d'expérience" valeur={psy.annees_experience} />
           </>

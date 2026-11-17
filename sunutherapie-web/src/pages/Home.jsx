@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { Icon, Skeletons, Empty, initials, formatDate, statutBadge } from '../components/ui';
+import { sousTitrePsy } from '../lib/psy';
 
 export default function Home() {
   const { user } = useAuth();
@@ -91,7 +92,7 @@ export default function Home() {
                   <div className="av">{initials(nom)}</div>
                   <div className="bd">
                     <div className="t">{nom}</div>
-                    <div className="s">{p.specialite || p.structure || 'Psychothérapeute'}</div>
+                    <div className="s">{sousTitrePsy(p)}</div>
                   </div>
                   <div className="r"><span className="badge badge-ok">Disponible</span></div>
                 </div>
