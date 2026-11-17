@@ -211,6 +211,15 @@
   .tl-item.flip .tl-media{order:2}
   .tl-media{position:relative;background:var(--surfaceAlt);min-height:270px}
   .tl-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .tl-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:30px 32px;color:#fff;
+    background:radial-gradient(circle at 85% 15%,rgba(59,125,216,.55),transparent 55%),linear-gradient(150deg,var(--primaryDarker),var(--primary))}
+  .tl-panel-k{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  .tl-panel-t{font-family:'Playfair Display',Georgia,serif;font-size:38px;line-height:1.05}
+  .tl-panel-n{display:flex;gap:26px;flex-wrap:wrap}
+  .tl-panel-n strong{display:block;font-family:'Playfair Display',Georgia,serif;font-size:30px;line-height:1}
+  .tl-panel-n span{font-size:12px;color:rgba(255,255,255,.8)}
+  .tl-panel-th{display:flex;flex-wrap:wrap;gap:6px}
+  .tl-panel-th span{font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
   .tl-body{padding:32px 34px;display:flex;flex-direction:column;justify-content:center}
   .tl-date{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.6px;
             text-transform:uppercase;color:var(--primaryDark);background:var(--primaryLight);
@@ -254,6 +263,8 @@
     .tl-item,.tl-item.flip{grid-template-columns:1fr}
     .tl-item.flip .tl-media{order:0}
     .tl-media{min-height:230px}
+    .tl-panel{position:relative;padding:26px 24px}
+    .tl-panel-t{font-size:32px}
     .tl-body{padding:26px 24px}
     .mentors{grid-template-columns:1fr}
     .partners{grid-template-columns:repeat(2,1fr);gap:28px}
@@ -447,7 +458,7 @@
     <div class="sec-head">
       <p class="kicker">Notre parcours</p>
       <h2 class="serif">Du terrain aux instances régionales</h2>
-      <p>SunuThérapie n'est pas née dans un bureau. Elle avance aux côtés des étudiants, du Ministère de la Santé et des acteurs africains de la santé mentale.</p>
+      <p>SunuThérapie n'est pas née dans un bureau. Elle avance aux côtés des étudiants, du Ministère de la Santé, de l'OMS et des acteurs africains de la santé mentale.</p>
     </div>
 
     <div class="stats">
@@ -508,6 +519,30 @@
           <p>Le Togo et l'Organisation mondiale de la Santé ont réuni 26 pays d'Afrique de l'Ouest et du Centre autour d'une même question : comment repenser les systèmes de soins en santé mentale. Une étape préparatoire au 7<sup>e</sup> Sommet mondial ministériel sur la santé mentale, accueilli par le Rwanda en 2027. SunuThérapie y était représentée.</p>
           <div class="tl-tags">
             <span>OMS Afrique</span><span>26 pays</span><span>Vers le Sommet mondial 2027</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="tl-item flip">
+        <div class="tl-media">
+          <div class="tl-panel" role="img" aria-label="Health Labs de l'OMS aux JOJ Dakar 2026 : 21 stations digitales, 4 thèmes de santé">
+            <span class="tl-panel-k">OMS Sénégal · Health Labs</span>
+            <b class="tl-panel-t">JOJ Dakar 2026</b>
+            <div class="tl-panel-n">
+              <div><strong>21</strong><span>stations digitales</span></div>
+              <div><strong>850+</strong><span>jeunes au Lab Santé mentale</span></div>
+            </div>
+            <div class="tl-panel-th">
+              <span>Santé mentale</span><span>Sport &amp; MNT</span><span>Nutrition</span><span>Hygiène menstruelle</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-body">
+          <span class="tl-date">Dakar · JOJ 2026 · novembre 2026</span>
+          <h3>Les Health Labs de l'OMS aux Jeux Olympiques de la Jeunesse</h3>
+          <p>Pendant les Jeux Olympiques de la Jeunesse Dakar 2026, l'OMS Sénégal a animé des Health Labs pour les jeunes et les enfants. L'équipe SunuThérapie y est intervenue comme partenaire numérique : nous avons transformé les contenus validés par l'OMS en 21 stations interactives sur écran tactile et tablette, puis suivi leur utilisation pendant les journées d'animation. Au Lab Santé mentale, plus de 850 jeunes ont participé du 2 au 6 novembre.</p>
+          <div class="tl-tags">
+            <span>OMS Sénégal</span><span>JOJ Dakar 2026</span><span>Health Labs</span><span>Santé mentale</span>
           </div>
         </div>
       </article>
