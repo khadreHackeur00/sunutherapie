@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../../lib/api';
 import { Icon, Skeletons, Empty, initials, formatDate, statutBadge } from '../../components/ui';
 
@@ -81,6 +82,11 @@ export default function ConsultationsPsy() {
             <div className="r">
               {statutBadge(c.statut)}
               {c.statut === 'acceptee' ? (
+                <Link className="btn btn-primary btn-sm" to={`/appel/${c.id}${c.mode === 'audio' ? '?mode=audio' : ''}`}>
+                  Rejoindre
+                </Link>
+              ) : null}
+              {c.statut === 'acceptee' ? (
                 <button className="btn btn-ghost btn-sm" disabled={enCours === c.id}
                         onClick={() => terminer(c)}>
                   {enCours === c.id ? '…' : 'Terminer'}
@@ -94,7 +100,7 @@ export default function ConsultationsPsy() {
         <Icon name="video" size={20} />
         <div>
           <b>Lancer une consultation</b>
-          L'appel vidéo ou audio se démarre depuis l'application mobile SunuThérapie. Ici, vous pouvez marquer une consultation comme terminée une fois l'entretien fini.
+          Cliquez sur « Rejoindre » pour lancer l'appel ici, dans votre navigateur, ou démarrez-le depuis l'application mobile. Marquez la consultation comme terminée une fois l'entretien fini.
         </div>
       </div>
     </>

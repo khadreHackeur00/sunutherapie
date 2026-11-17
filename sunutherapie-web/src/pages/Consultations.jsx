@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../lib/api';
 import { Icon, Skeletons, Empty, Modal, initials, formatDate, statutBadge } from '../components/ui';
 
@@ -52,6 +53,11 @@ export default function Consultations() {
             </div>
             <div className="r">
               {statutBadge(c.statut)}
+              {c.statut === 'acceptee' ? (
+                <Link className="btn btn-primary btn-sm" to={`/appel/${c.id}${c.mode === 'audio' ? '?mode=audio' : ''}`}>
+                  Rejoindre
+                </Link>
+              ) : null}
               {c.statut === 'terminee' && !c.note_etudiant ? (
                 <button className="btn btn-ghost btn-sm" onClick={() => setANoter(c)}>Noter</button>
               ) : null}
@@ -66,7 +72,7 @@ export default function Consultations() {
         <Icon name="video" size={20} />
         <div>
           <b>Rejoindre un appel</b>
-          Les consultations vidéo et audio se déroulent dans l'application mobile SunuThérapie, qui gère la caméra et le micro de votre téléphone.
+          Le jour du rendez-vous, cliquez sur « Rejoindre » pour lancer l'appel ici, dans votre navigateur, ou depuis l'application mobile SunuThérapie. Autorisez la caméra et le micro quand le navigateur le demande.
         </div>
       </div>
 

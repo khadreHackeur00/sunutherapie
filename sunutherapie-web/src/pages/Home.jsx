@@ -73,8 +73,8 @@ export default function Home() {
       <div className="note-mobile" style={{ marginTop: 18 }}>
         <Icon name="video" size={20} />
         <div>
-          <b>Les consultations vidéo se font sur mobile</b>
-          Le jour du rendez-vous, ouvrez l'application SunuThérapie sur votre téléphone pour rejoindre l'appel.
+          <b>Rejoindre une consultation vidéo</b>
+          Le jour du rendez-vous, ouvrez « Mes consultations » et cliquez sur « Rejoindre », ici ou dans l'application mobile.
         </div>
       </div>
 

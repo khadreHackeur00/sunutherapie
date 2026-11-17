@@ -11,6 +11,7 @@ import Ressources from './pages/Ressources';
 import Bibliotheque from './pages/Bibliotheque';
 import Forum from './pages/Forum';
 import Profil from './pages/Profil';
+import Appel from './pages/Appel';
 import PsyAccueil from './pages/psy/Accueil';
 import PsyDemandes from './pages/psy/Demandes';
 import PsyConsultations from './pages/psy/ConsultationsPsy';
@@ -45,6 +46,7 @@ function Espaces() {
         <Route path="ressources" element={psy ? <PsyRessources /> : <Ressources />} />
         <Route path="bibliotheque" element={<Bibliotheque />} />
         <Route path="profil" element={<Profil />} />
+        <Route path="appel/:id" element={<Appel />} />
 
         {psy ? (
           <>

@@ -216,3 +216,19 @@ img{max-width:100%;display:block}
   .grid-2,.grid-3{grid-template-columns:1fr}
   .pdf-frame{height:70dvh}
 }
+
+/* ─── Appel vidéo ─── */
+.appel{display:flex;flex-direction:column;gap:16px}
+.appel-head h1{margin:0}
+.appel-head p{margin:4px 0 0;color:var(--muted)}
+.appel-scene{position:relative;border-radius:18px;overflow:hidden;background:#0f1f1e;aspect-ratio:16/9;max-height:70vh}
+.appel-distant{position:absolute;inset:0}
+.appel-local{position:absolute;right:14px;bottom:14px;width:26%;min-width:120px;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#1d3533;border:2px solid rgba(255,255,255,.25)}
+.appel-vide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.75);font-size:14px;text-align:center;padding:12px}
+.appel-vide.petit{font-size:12px}
+.appel-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.appel-btn{border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:14px;cursor:pointer;background:var(--primaryLight);color:var(--primaryDark)}
+.appel-btn.off{background:var(--warningLight);color:var(--warning)}
+.appel-btn.raccrocher{background:var(--danger);color:#fff}
+.appel-btn:disabled{opacity:.5;cursor:default}
+@media (max-width:640px){.appel-scene{aspect-ratio:3/4}.appel-local{width:34%}}

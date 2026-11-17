@@ -57,8 +57,8 @@ export default function Accueil() {
       <div className="note-mobile" style={{ marginTop: 18 }}>
         <Icon name="video" size={20} />
         <div>
-          <b>Les appels se font sur mobile</b>
-          Cet espace web sert à gérer vos demandes, vos disponibilités, vos notes et vos ressources. L'appel vidéo se lance depuis l'application SunuThérapie.
+          <b>Lancer une consultation vidéo</b>
+          Dans « Mes consultations », cliquez sur « Rejoindre » pour lancer l'appel dans votre navigateur. Il marche aussi depuis l'application mobile.
         </div>
       </div>
 

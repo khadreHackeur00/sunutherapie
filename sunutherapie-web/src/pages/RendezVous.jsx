@@ -144,7 +144,7 @@ function Reservation({ psy, onClose, onReserve }) {
           <option value="video">Vidéo</option>
           <option value="audio">Audio</option>
         </select>
-        <span className="hint">L'appel se déroulera dans l'application mobile.</span>
+        <span className="hint">L'appel se fera dans votre navigateur ou dans l'application mobile.</span>
       </div>
 
       <div className="field">

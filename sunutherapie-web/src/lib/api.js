@@ -91,6 +91,7 @@ export const getConsultations = async () =>
   list(await request('/consultations/historique/etudiant'), 'consultations');
 export const creerConsultation = (payload) =>
   request('/consultations', { method: 'POST', body: payload });
+export const getVideoToken = (id) => request(`/consultations/${id}/video-token`);
 export const noterConsultation = (id, note, commentaire) =>
   request(`/consultations/${id}/noter`, { method: 'POST', body: { note, commentaire } });
 

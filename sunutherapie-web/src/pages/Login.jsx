@@ -8,7 +8,7 @@ function Aside() {
       <div className="brand"><img src="/logo.jpeg" alt="" />SunuThérapie</div>
       <h1 className="serif">Votre bien-être mental, notre priorité</h1>
       <p>Consultez vos rendez-vous, lisez les ressources partagées par votre psychothérapeute et échangez avec la communauté, depuis votre navigateur.</p>
-      <p className="note">Les consultations vidéo se déroulent dans l'application mobile SunuThérapie. Cet espace web vous donne accès à tout le reste.</p>
+      <p className="note">Rejoignez vos consultations vidéo directement depuis votre navigateur ou depuis l'application mobile SunuThérapie.</p>
     </aside>
   );
 }
