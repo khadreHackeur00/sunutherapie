@@ -41,7 +41,9 @@ function Espaces() {
   const { user } = useAuth();
   const psy = user?.role === 'psychologue';
   // Un étudiant doit d'abord accepter le cadre (confidentialité et ses limites).
-  if (user?.role === 'etudiant' && !user.consentement_at) return <Consentement />;
+  // On ne bloque que si l'API connaît le consentement (champ présent), pour ne jamais
+  // enfermer un étudiant si le serveur n'est pas encore à jour.
+  if (user?.role === 'etudiant' && 'consentement_at' in user && !user.consentement_at) return <Consentement />;
   return (
     <Routes>
       <Route element={<Layout />}>
