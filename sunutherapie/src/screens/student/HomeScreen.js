@@ -159,6 +159,17 @@ export default function HomeScreen({ navigation }) {
           </View>
         </Card>
 
+        <Card style={styles.pointCardSec} onPress={() => navigation.navigate('BienEtre')}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
+            <View style={[styles.pointIcon, { backgroundColor: colors.accentLight }]}><Ionicons name="leaf-outline" size={22} color={colors.accent} /></View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.pointTitre}>Prendre soin de soi</Text>
+              <Text style={styles.pointSous}>Stress, sommeil, anxiété, émotions</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={colors.textFaint} />
+          </View>
+        </Card>
+
         {/* Actions rapides */}
         <View style={styles.actionsRow}>
           <QuickAction icon="calendar-outline" label="Prendre RDV" onPress={() => navigation.navigate('Consultations')} />
@@ -284,6 +295,7 @@ const styles = StyleSheet.create({
   actionsRow: { flexDirection: 'row', gap: spacing.sm, paddingHorizontal: spacing.lg, marginTop: spacing.lg },
   pointCard: { marginHorizontal: spacing.lg, marginTop: spacing.xl },
   pointCardRappel: { borderWidth: 1.5, borderColor: colors.primary },
+  pointCardSec: { marginHorizontal: spacing.lg, marginTop: spacing.md },
   pointIcon: { width: 42, height: 42, borderRadius: 12, backgroundColor: colors.primaryLight, alignItems: 'center', justifyContent: 'center' },
   pointTitre: { fontSize: 16, fontWeight: '700', color: colors.text },
   pointSous: { fontSize: 13, color: colors.textMuted, marginTop: 2 },

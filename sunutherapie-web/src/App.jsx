@@ -13,6 +13,7 @@ import Forum from './pages/Forum';
 import Profil from './pages/Profil';
 import Appel from './pages/Appel';
 import Evaluation from './pages/Evaluation';
+import BienEtre from './pages/BienEtre';
 import Consentement from './pages/Consentement';
 import TableauDeBord from './pages/admin/TableauDeBord';
 import PsyAccueil from './pages/psy/Accueil';
@@ -76,6 +77,8 @@ function Espaces() {
           <>
             <Route path="rendez-vous" element={<RendezVous />} />
             <Route path="evaluation" element={<Evaluation />} />
+            <Route path="bien-etre" element={<BienEtre />} />
+            <Route path="bien-etre/:id" element={<BienEtre />} />
             <Route path="forum" element={<Forum />} />
           </>
         )}

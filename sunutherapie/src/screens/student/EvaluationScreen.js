@@ -30,7 +30,7 @@ export default function EvaluationScreen({ navigation }) {
       <Text style={styles.sous}>Deux questionnaires courts pour savoir comment vous allez. Vos réponses restent confidentielles.</Text>
 
       {resultat ? (
-        <Resultat r={resultat} onAutre={() => setResultat(null)} onRdv={() => navigation.navigate('StudentTabs', { screen: 'Consultations' })} />
+        <Resultat r={resultat} onAutre={() => setResultat(null)} onRdv={() => navigation.navigate('StudentTabs', { screen: 'Consultations' })} onModules={() => navigation.navigate('BienEtre')} />
       ) : null}
 
       {type ? (
@@ -121,7 +121,7 @@ function Questionnaire({ type, onTermine }) {
   );
 }
 
-function Resultat({ r, onAutre, onRdv }) {
+function Resultat({ r, onAutre, onRdv, onModules }) {
   const q = QUESTIONNAIRES[r.type];
   const n = NIVEAUX[r.niveau_propose];
   return (
@@ -148,6 +148,7 @@ function Resultat({ r, onAutre, onRdv }) {
 
       <View style={{ gap: spacing.sm, marginTop: spacing.md }}>
         {r.niveau_propose >= 2 ? <Button label="Prendre rendez-vous" onPress={onRdv} full /> : null}
+        {r.niveau_propose <= 2 ? <Button label="Modules « Prendre soin de soi »" variant="ghost" onPress={onModules} full /> : null}
         <Button label="Faire un autre questionnaire" variant="outline" onPress={onAutre} full />
       </View>
       <Text style={styles.note}>Ce résultat est une première indication, pas un diagnostic. Un professionnel le relira avec vous.</Text>

@@ -15,6 +15,7 @@ import ForumScreen from '../screens/student/ForumScreen';
 import WelcomeScreen from '../screens/student/WelcomeScreen';
 import AssistantScreen from '../screens/student/AssistantScreen';
 import EvaluationScreen from '../screens/student/EvaluationScreen';
+import BienEtreScreen from '../screens/student/BienEtreScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -85,6 +86,7 @@ export default function StudentNavigator() {
       <Stack.Screen name="StudentTabs" component={StudentTabs} />
       <Stack.Screen name="Assistant" component={AssistantScreen} />
       <Stack.Screen name="Evaluation" component={EvaluationScreen} />
+      <Stack.Screen name="BienEtre" component={BienEtreScreen} />
     </Stack.Navigator>
   );
 }

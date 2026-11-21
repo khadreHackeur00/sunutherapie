@@ -144,6 +144,7 @@ function Resultat({ r, onFermer }) {
 
       <div className="modal-actions">
         <button className="btn btn-outline btn-sm" onClick={onFermer}>Faire un autre questionnaire</button>
+        {r.niveau_propose <= 2 ? <Link className="btn btn-ghost btn-sm" to="/bien-etre">Modules « Prendre soin de soi »</Link> : null}
         {r.niveau_propose >= 2 ? <Link className="btn btn-primary btn-sm" to="/rendez-vous">Prendre rendez-vous</Link> : null}
       </div>
       <p className="eval-note">Ce résultat est une première indication, pas un diagnostic. Un professionnel le relira avec vous.</p>
