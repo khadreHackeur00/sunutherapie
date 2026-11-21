@@ -95,6 +95,8 @@ export const donnerConsentement = () => request('/consentement', { method: 'POST
 export const envoyerEvaluation = (type, reponses) => request('/evaluations', { method: 'POST', body: { type, reponses } });
 export const getMesEvaluations = async () => list(await request('/evaluations'));
 export const getEvaluationsEtudiant = async (etudiantId) => list(await request(`/etudiants/${etudiantId}/evaluations`));
+export const getAlertes = async () => list(await request('/alertes'));
+export const prendreEnChargeAlerte = (id, note) => request(`/alertes/${id}/prise-en-charge`, { method: 'POST', body: { note } });
 export const getVideoToken = (id) => request(`/consultations/${id}/video-token`);
 export const noterConsultation = (id, note, commentaire) =>
   request(`/consultations/${id}/noter`, { method: 'POST', body: { note, commentaire } });

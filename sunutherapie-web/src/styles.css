@@ -286,3 +286,21 @@ img{max-width:100%;display:block}
 .badge.niveau-2{background:var(--accentLight);color:var(--accent)}
 .badge.niveau-3{background:var(--warningLight);color:var(--warning)}
 .badge.niveau-4{background:var(--dangerLight);color:var(--danger)}
+
+/* ─── Alertes de risque (psy) ─── */
+.alertes{border:2px solid var(--danger);background:#fff;margin-bottom:20px}
+.alertes-h{display:flex;align-items:center;gap:10px}
+.alertes-h h2{font-size:18px;color:var(--danger)}
+.alertes-dot{width:10px;height:10px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 0 rgba(214,69,69,.5);animation:alerte-pulse 1.6s infinite}
+@keyframes alerte-pulse{70%{box-shadow:0 0 0 10px rgba(214,69,69,0)}100%{box-shadow:0 0 0 0 rgba(214,69,69,0)}}
+@media (prefers-reduced-motion:reduce){.alertes-dot{animation:none}}
+.alertes-sub{font-size:13.5px;color:var(--muted);margin:6px 0 12px}
+.alerte{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;
+  background:var(--dangerLight);border-radius:12px;padding:12px 14px;margin-top:10px}
+.alerte-bd{display:flex;flex-direction:column;gap:3px;min-width:0}
+.alerte-bd span{font-size:13px;color:var(--muted)}
+.alerte-contact{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;font-weight:600}
+.alerte-contact a{color:var(--danger)}
+.alerte-form{flex:1 1 280px;display:flex;flex-direction:column;gap:8px}
+.alerte-form textarea{min-height:70px}
+.alerte-actions{display:flex;gap:8px;justify-content:flex-end}

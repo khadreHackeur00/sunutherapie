@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../../lib/api';
 import { useAuth } from '../../lib/auth';
 import { Icon, Skeletons, Empty, initials, formatDate, statutBadge } from '../../components/ui';
+import AlertesRisque from '../../components/AlertesRisque';
 
 export default function Accueil() {
   const { user } = useAuth();
@@ -46,6 +47,8 @@ export default function Accueil() {
       </div>
 
       {erreur ? <div className="alert alert-error">{erreur}</div> : null}
+
+      <AlertesRisque />
 
       <div className="grid grid-3">
         <Stat n={demandes === null ? '…' : demandes.length} label="Demandes en attente" to="/demandes" />

@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation extends Model
 {
-    protected $fillable = ['user_id', 'type', 'reponses', 'score', 'severite', 'risque', 'niveau_propose'];
+    protected $fillable = ['user_id', 'type', 'reponses', 'score', 'severite', 'risque', 'niveau_propose',
+        'pris_en_charge_at', 'pris_en_charge_par', 'note_prise_en_charge'];
 
     protected $casts = [
         'reponses' => 'array',
         'risque' => 'boolean',
+        'pris_en_charge_at' => 'datetime',
     ];
 
     public const QUESTIONS = ['phq9' => 9, 'gad7' => 7];

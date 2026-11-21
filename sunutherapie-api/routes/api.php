@@ -38,8 +38,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/evaluations', [EvaluationController::class, 'store']);
         Route::get('/evaluations', [EvaluationController::class, 'mesEvaluations']);
     });
-    Route::get('/etudiants/{id}/evaluations', [EvaluationController::class, 'evaluationsEtudiant'])
-        ->middleware('check.role:psychologue');
+    Route::middleware('check.role:psychologue')->group(function () {
+        Route::get('/etudiants/{id}/evaluations', [EvaluationController::class, 'evaluationsEtudiant']);
+        Route::get('/alertes', [EvaluationController::class, 'alertes']);
+        Route::post('/alertes/{id}/prise-en-charge', [EvaluationController::class, 'prendreEnCharge']);
+    });
     // ─── Assistant IA (orientation étudiant) ───
     Route::post('/assistant/chat', [\App\Http\Controllers\Api\AssistantController::class, 'chat']);
     // ─── Psychothérapeutes ───
