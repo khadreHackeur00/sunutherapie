@@ -13,6 +13,7 @@ import StudentNavigator from './StudentNavigator';
 import PsyNavigator from './PsyNavigator';
 import VideoCallScreen from '../screens/shared/VideoCallScreen';
 import PdfViewerScreen from '../screens/shared/PdfViewerScreen';
+import ConsentementScreen from '../screens/student/ConsentementScreen';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,9 @@ export default function AppNavigator() {
             <Stack.Screen name="VideoCall" component={VideoCallScreen} />
             <Stack.Screen name="PdfViewer" component={PdfViewerScreen} />
           </>
+        ) : userProfile && 'consentement_at' in userProfile && !userProfile.consentement_at ? (
+          // Étudiant qui n'a pas encore accepté le cadre (seulement si l'API gère le consentement).
+          <Stack.Screen name="Consentement" component={ConsentementScreen} />
         ) : (
           <>
             <Stack.Screen name="StudentApp" component={StudentNavigator} />

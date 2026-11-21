@@ -9,6 +9,7 @@ import { API_URL } from '../../config/constants';
 import { colors, spacing, radius } from '../../config/theme';
 import { Card, Avatar, Badge, SectionHeader, EmptyState } from '../../components/ui';
 import { apiGetConsultationsPsy } from '../../services/api';
+import AlertesRisque from '../../components/AlertesRisque';
 
 const STATUTS = {
   en_attente: { tone: 'warning', label: 'En attente' },
@@ -92,6 +93,8 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        <AlertesRisque />
 
         {/* Disponibilité */}
         <View style={styles.dispoWrap}>

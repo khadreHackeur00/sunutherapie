@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, spacing, radius } from '../../config/theme';
 import { Button } from '../../components/ui';
+import { TexteConsentement, CaseConsentement } from '../../components/TexteConsentement';
 
 const DOMAINES_AUTORISES = [
   '@ucad.edu.sn', '@ugb.edu.sn', '@univ-thies.sn', '@unstim.sn', '@zig.univ.sn', '@uadb.edu.sn', '@gmail.com',
@@ -25,6 +26,8 @@ export default function RegisterScreen({ navigation }) {
     numero_carte_etudiant: '', universite: 'UCAD', faculte: '', niveau: '',
   });
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [voirCadre, setVoirCadre] = useState(false);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,6 +49,7 @@ export default function RegisterScreen({ navigation }) {
     if (!form.numero_carte_etudiant.trim()) newErrors.numero_carte_etudiant = 'Numéro de carte requis';
     if (!form.faculte.trim()) newErrors.faculte = 'Faculté requise';
     if (!form.niveau) newErrors.niveau = 'Niveau requis';
+    if (!consent) newErrors.consentement = 'Merci d\'accepter le cadre de confidentialité';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -54,7 +58,7 @@ export default function RegisterScreen({ navigation }) {
     if (!validate()) return;
     setLoading(true);
     try {
-      const result = await register(form);
+      const result = await register({ ...form, consentement: true });
       if (!result.success) {
         if (result.errors) {
           const apiErrors = {};
@@ -152,6 +156,14 @@ export default function RegisterScreen({ navigation }) {
               {errors.password_confirmation ? <Text style={styles.errorText}>{errors.password_confirmation}</Text> : null}
             </View>
 
+            <TouchableOpacity onPress={() => setVoirCadre(!voirCadre)} style={{ marginTop: spacing.md }}>
+              <Text style={{ color: colors.primaryDark, fontWeight: '600' }}>
+                {voirCadre ? '▾' : '▸'} Confidentialité et ses limites : à lire avant de créer votre compte
+              </Text>
+            </TouchableOpacity>
+            {voirCadre ? <View style={{ marginTop: spacing.sm }}><TexteConsentement /></View> : null}
+            <CaseConsentement coche={consent} onChange={setConsent} />
+            {errors.consentement ? <Text style={{ color: colors.danger, fontSize: 12, marginTop: -6, marginBottom: 6 }}>{errors.consentement}</Text> : null}
             <Button label="Créer mon compte" onPress={handleRegister} loading={loading} full size="lg" style={{ marginTop: spacing.sm }} />
 
             <TouchableOpacity style={styles.loginLink} onPress={() => navigation.navigate('LoginEtudiant')}>

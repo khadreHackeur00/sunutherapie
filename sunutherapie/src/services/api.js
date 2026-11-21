@@ -173,3 +173,41 @@ export const apiGetNotesEtudiant = async () => {
   const data = await response.json();
   return { success: data.success, data: data.data || [] };
 };
+
+// ─── CONSENTEMENT ET ÉVALUATIONS (PHQ-9, GAD-7) ───
+export const apiDonnerConsentement = async () => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/consentement`, {
+    method: 'POST', headers: { ...headers, Accept: 'application/json' }, body: JSON.stringify({ accepte: true }),
+  });
+  return response.json();
+};
+
+export const apiEnvoyerEvaluation = async (type, reponses) => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/evaluations`, {
+    method: 'POST', headers: { ...headers, Accept: 'application/json' }, body: JSON.stringify({ type, reponses }),
+  });
+  return response.json();
+};
+
+export const apiMesEvaluations = async () => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/evaluations`, { headers: { ...headers, Accept: 'application/json' } });
+  return response.json();
+};
+
+// ─── ALERTES DE RISQUE (psy) ───
+export const apiGetAlertes = async () => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/alertes`, { headers: { ...headers, Accept: 'application/json' } });
+  return response.json();
+};
+
+export const apiPrendreEnChargeAlerte = async (id, note) => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/alertes/${id}/prise-en-charge`, {
+    method: 'POST', headers: { ...headers, Accept: 'application/json' }, body: JSON.stringify({ note }),
+  });
+  return response.json();
+};

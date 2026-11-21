@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { apiLogin, apiLogout, apiRegister, apiSavePushToken } from '../services/api';
+import { apiLogin, apiLogout, apiRegister, apiSavePushToken, apiGetProfile, apiDonnerConsentement } from '../services/api';
 import { registerForPushNotificationsAsync } from '../services/push';
 
 const AuthContext = createContext({});
@@ -26,6 +26,33 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     loadStoredAuth();
   }, []);
+
+  const majUtilisateur = async (u) => {
+    const fixed = fixBooleans(u);
+    await AsyncStorage.setItem('auth_user', JSON.stringify(fixed));
+    setUser(fixed);
+    setUserProfile(fixed);
+    return fixed;
+  };
+
+  // Recharge le profil depuis le serveur (ex. pour savoir si le consentement a été donné).
+  const refreshProfile = async () => {
+    try {
+      const data = await apiGetProfile();
+      if (data?.success && data.user) await majUtilisateur(data.user);
+    } catch (e) {}
+  };
+
+  const accepterConsentement = async () => {
+    const data = await apiDonnerConsentement();
+    if (!data?.success) throw new Error(data?.message || "Impossible d'enregistrer votre accord");
+    await majUtilisateur({ ...user, ...data.user });
+  };
+
+  // Au démarrage avec une session enregistrée : on rafraîchit le profil une fois.
+  useEffect(() => {
+    if (token) refreshProfile();
+  }, [token]);
 
   // Enregistre le token de notifications push dès qu'un utilisateur est connecté.
   useEffect(() => {
@@ -115,6 +142,8 @@ export const AuthProvider = ({ children }) => {
       login,
       register,
       logout,
+      refreshProfile,
+      accepterConsentement,
     }}>
       {children}
     </AuthContext.Provider>

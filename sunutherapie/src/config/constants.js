@@ -1,6 +1,7 @@
 //export const API_URL = 'http://10.0.2.2:8000/api'; // Android émulateur
 // export const API_URL = 'http://localhost:8000/api'; // iOS simulateur
-export const API_URL = 'https://sunutherapi.com/api'; // Production
+// Production par défaut ; EXPO_PUBLIC_API_URL permet de tester contre un serveur local.
+export const API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://sunutherapi.com/api';
 // export const API_URL = 'http://localhost:8000/api'; // Local (simulateur iOS)
 
 // Palette rétro-compatible — alignée sur le design system (src/config/theme.js).
