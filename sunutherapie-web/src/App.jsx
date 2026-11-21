@@ -14,6 +14,7 @@ import Profil from './pages/Profil';
 import Appel from './pages/Appel';
 import Evaluation from './pages/Evaluation';
 import Consentement from './pages/Consentement';
+import TableauDeBord from './pages/admin/TableauDeBord';
 import PsyAccueil from './pages/psy/Accueil';
 import PsyDemandes from './pages/psy/Demandes';
 import PsyConsultations from './pages/psy/ConsultationsPsy';
@@ -44,6 +45,17 @@ function Espaces() {
   // On ne bloque que si l'API connaît le consentement (champ présent), pour ne jamais
   // enfermer un étudiant si le serveur n'est pas encore à jour.
   if (user?.role === 'etudiant' && 'consentement_at' in user && !user.consentement_at) return <Consentement />;
+  if (user?.role === 'admin') {
+    return (
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<TableauDeBord />} />
+          <Route path="profil" element={<Profil />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    );
+  }
   return (
     <Routes>
       <Route element={<Layout />}>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ForumController;
 use App\Http\Controllers\Api\BibliothequeController;
 use App\Http\Controllers\Api\PushTokenController;
 use App\Http\Controllers\Api\EvaluationController;
+use App\Http\Controllers\Api\StatistiquesController;
 
 
 // ─── Routes publiques ────────────────────────────────────────
@@ -32,6 +33,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/push-token', [PushTokenController::class, 'store']);
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::put('/profile', [AuthController::class, 'updateProfile']);
+    // ─── Tableau de bord partenaires (chiffres anonymes) ───
+    Route::get('/statistiques', [StatistiquesController::class, 'index'])->middleware('check.role:admin');
+
     // ─── Consentement et évaluations (PHQ-9, GAD-7) ───
     Route::post('/consentement', [EvaluationController::class, 'consentir']);
     Route::middleware('check.role:etudiant')->group(function () {

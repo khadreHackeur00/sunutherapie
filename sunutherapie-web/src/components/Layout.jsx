@@ -14,6 +14,11 @@ const LIENS_ETUDIANT = [
   { to: '/profil', icon: 'user', label: 'Mon profil' },
 ];
 
+const LIENS_ADMIN = [
+  { to: '/', icon: 'home', label: 'Tableau de bord', end: true },
+  { to: '/profil', icon: 'user', label: 'Mon profil' },
+];
+
 const LIENS_PSY = [
   { to: '/', icon: 'home', label: 'Accueil', end: true },
   { to: '/demandes', icon: 'calendar', label: 'Demandes' },
@@ -34,7 +39,7 @@ export default function Layout() {
   const fermer = () => setOuvert(false);
 
   const estPsy = user?.role === 'psychologue';
-  const liens = estPsy ? LIENS_PSY : LIENS_ETUDIANT;
+  const liens = user?.role === 'admin' ? LIENS_ADMIN : estPsy ? LIENS_PSY : LIENS_ETUDIANT;
   const nom = user?.name || user?.nom || user?.email || 'Utilisateur';
 
   return (
@@ -62,7 +67,7 @@ export default function Layout() {
             <div className="av">{initials(nom)}</div>
             <div style={{ minWidth: 0 }}>
               <div className="nm">{nom}</div>
-              <div className="rl">{estPsy ? 'Psychothérapeute' : 'Étudiant'}</div>
+              <div className="rl">{user?.role === 'admin' ? 'Administrateur' : estPsy ? 'Psychothérapeute' : 'Étudiant'}</div>
             </div>
           </div>
           <button className="btn btn-outline btn-sm btn-block" onClick={signOut}>

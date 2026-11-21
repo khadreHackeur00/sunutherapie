@@ -318,3 +318,42 @@ img{max-width:100%;display:block}
 .courbe-legende{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:4px}
 .courbe-legende i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
 .courbe-note{margin-left:auto;color:var(--faint)}
+
+/* ─── Tableau de bord partenaires ─── */
+.tdb-filtres{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.tdb-csv{margin-left:auto}
+.tdb-tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:18px}
+.tdb-tuile{display:flex;flex-direction:column;gap:4px}
+.tdb-tuile b{font-family:'Playfair Display',Georgia,serif;font-size:34px;line-height:1.05;color:var(--primaryDark)}
+.tdb-tuile .l{font-weight:700;font-size:14px;color:var(--ink)}
+.tdb-tuile .d{font-size:12.5px;color:var(--muted)}
+.tdb-tuile.alerte{border:1.5px solid var(--danger)}
+.tdb-grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-bottom:18px}
+.tdb-grille > .card,.tdb-grille + .card{margin:0}
+section.card{margin-bottom:18px}
+.tdb-sous{font-size:13px;color:var(--muted);margin:-4px 0 14px}
+.tdb-barres{display:flex;flex-direction:column;gap:12px}
+.tdb-barre{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;gap:12px;align-items:center;font-size:13.5px}
+.tdb-barre-l{color:var(--ink)}
+.tdb-barre-piste{height:12px;background:var(--surfaceAlt);border-radius:4px;overflow:hidden}
+.tdb-barre-val{display:block;height:100%;background:var(--primary);border-radius:0 4px 4px 0}
+.tdb-barre:hover .tdb-barre-val{background:var(--primaryDark)}
+.tdb-barre-n{font-weight:700;color:var(--ink);min-width:58px;text-align:right}
+.tdb-barre-n small{font-weight:500;color:var(--muted)}
+.tdb-evol{display:flex;gap:26px;flex-wrap:wrap}
+.tdb-evol b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:30px;color:var(--ink);line-height:1.1}
+.tdb-evol span{font-size:13px;color:var(--muted)}
+.tdb-mois{display:flex;align-items:flex-end;gap:10px;height:210px;padding-top:18px;overflow-x:auto}
+.tdb-mois-col{flex:1 0 42px;max-width:80px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px}
+.tdb-mois-barre{width:60%;min-height:2px;max-height:150px;background:var(--primary);border-radius:4px 4px 0 0}
+.tdb-mois-zone{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;border-bottom:1px solid var(--border)}
+.tdb-mois-col:hover .tdb-mois-barre{background:var(--primaryDark)}
+.tdb-mois-n{font-size:12px;font-weight:700;color:var(--ink)}
+.tdb-mois-l{font-size:11.5px;color:var(--muted);white-space:nowrap;padding-top:6px}
+.tdb-details{margin-top:14px;font-size:13.5px}
+.tdb-details summary{cursor:pointer;color:var(--primaryDark);font-weight:600}
+.tdb-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+.tdb-table th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;border-bottom:1px solid var(--border);padding:6px 8px}
+.tdb-table td{padding:8px;border-bottom:1px solid var(--border)}
+.tdb-note{font-size:12px;color:var(--faint);margin:4px 0 24px}
+@media (max-width:560px){.tdb-barre{grid-template-columns:1fr auto}.tdb-barre-piste{grid-column:1/-1;order:3}}
