@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TexteConsentement } from './Consentement';
 import { Link, useNavigate } from 'react-router-dom';
 import * as api from '../lib/api';
 import { useAuth } from '../lib/auth';
@@ -13,6 +14,7 @@ export default function Register() {
     name: '', email: '', password: '', password_confirmation: '', telephone: '',
     numero_carte_etudiant: '', universite: '', faculte: '', niveau: 'L1',
   });
+  const [consent, setConsent] = useState(false);
   const [erreur, setErreur] = useState(null);
   const [envoi, setEnvoi] = useState(false);
 
@@ -21,13 +23,17 @@ export default function Register() {
   const submit = async (e) => {
     e.preventDefault();
     setErreur(null);
+    if (!consent) {
+      setErreur('Merci d\'accepter le cadre de confidentialité pour créer votre compte.');
+      return;
+    }
     if (f.password !== f.password_confirmation) {
       setErreur('Les deux mots de passe ne correspondent pas.');
       return;
     }
     setEnvoi(true);
     try {
-      const res = await api.register({ ...f, email: f.email.trim() });
+      const res = await api.register({ ...f, email: f.email.trim(), consentement: true });
       if (res.token) {
         api.setToken(res.token);
         setUser(res.user);
@@ -105,7 +111,16 @@ export default function Register() {
             <input id="tel" value={f.telephone} onChange={set('telephone')} autoComplete="tel" />
           </div>
 
-          <button className="btn btn-primary btn-block" disabled={envoi}>
+          <details className="consent-details">
+            <summary>Confidentialité et ses limites : à lire avant de créer votre compte</summary>
+            <TexteConsentement />
+          </details>
+          <label className="consent-check">
+            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+            <span>J'ai lu ces informations et j'accepte d'utiliser SunuThérapie dans ce cadre.</span>
+          </label>
+
+          <button className="btn btn-primary btn-block" disabled={envoi || !consent}>
             {envoi ? 'Création…' : 'Créer mon compte'}
           </button>
 

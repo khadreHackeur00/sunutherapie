@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../../lib/api';
-import { Icon, Skeletons, Empty, initials, formatDate, statutBadge } from '../../components/ui';
+import { Icon, Skeletons, Empty, Modal, initials, formatDate, statutBadge } from '../../components/ui';
+import { QUESTIONNAIRES, SEVERITE, NIVEAUX } from '../../lib/evaluation';
 
 const FILTRES = [
   { k: 'toutes', label: 'Toutes' },
@@ -15,6 +16,7 @@ export default function ConsultationsPsy() {
   const [erreur, setErreur] = useState(null);
   const [filtre, setFiltre] = useState('toutes');
   const [enCours, setEnCours] = useState(null);
+  const [evalsDe, setEvalsDe] = useState(null);
 
   const charger = () => {
     api.getConsultationsPsy()
@@ -81,6 +83,9 @@ export default function ConsultationsPsy() {
             </div>
             <div className="r">
               {statutBadge(c.statut)}
+              {c.etudiant?.id ? (
+                <button className="btn btn-ghost btn-sm" onClick={() => setEvalsDe(c)}>Évaluations</button>
+              ) : null}
               {c.statut === 'acceptee' ? (
                 <Link className="btn btn-primary btn-sm" to={`/appel/${c.id}${c.mode === 'audio' ? '?mode=audio' : ''}`}>
                   Rejoindre
@@ -103,6 +108,36 @@ export default function ConsultationsPsy() {
           Cliquez sur « Rejoindre » pour lancer l'appel ici, dans votre navigateur, ou démarrez-le depuis l'application mobile. Marquez la consultation comme terminée une fois l'entretien fini.
         </div>
       </div>
+      {evalsDe ? (
+        <EvaluationsEtudiant etudiantId={evalsDe.etudiant.id} nom={nomEtudiant(evalsDe)} onClose={() => setEvalsDe(null)} />
+      ) : null}
     </>
+  );
+}
+
+function EvaluationsEtudiant({ etudiantId, nom, onClose }) {
+  const [liste, setListe] = useState(null);
+  const [erreur, setErreur] = useState(null);
+
+  useEffect(() => {
+    api.getEvaluationsEtudiant(etudiantId).then(setListe).catch((e) => { setErreur(e.message); setListe([]); });
+  }, [etudiantId]);
+
+  return (
+    <Modal title={`Évaluations de ${nom}`} sub="Questionnaires PHQ-9 et GAD-7 remplis par l'étudiant. Le niveau est une proposition à valider en entretien." onClose={onClose}>
+      {erreur ? <div className="alert alert-error">{erreur}</div> : null}
+      {liste === null ? <Skeletons n={2} />
+        : liste.length === 0 ? <p className="eval-vide">L'étudiant n'a encore rempli aucun questionnaire.</p>
+        : liste.map((e) => (
+          <div className="item" key={e.id}>
+            <div className="bd">
+              <div className="t">{QUESTIONNAIRES[e.type]?.court} · {e.score}/{QUESTIONNAIRES[e.type]?.max} · {SEVERITE[e.severite] || e.severite}</div>
+              <div className="s">{formatDate(e.created_at)} · {NIVEAUX[e.niveau_propose]?.titre}</div>
+              {e.risque ? <div className="s" style={{ color: 'var(--danger)', fontWeight: 700 }}>Risque signalé (question 9 du PHQ-9) : à recontacter en priorité</div> : null}
+            </div>
+            <div className="r"><span className={`badge niveau-${e.niveau_propose}`}>Niveau {e.niveau_propose}</span></div>
+          </div>
+        ))}
+    </Modal>
   );
 }

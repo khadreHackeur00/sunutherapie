@@ -24,6 +24,7 @@ class AuthController extends Controller
             'universite' => 'required|string|max:255',
             'faculte' => 'required|string|max:255',
             'niveau' => 'required|in:L1,L2,L3,M1,M2,Doctorat',
+            'consentement' => 'sometimes|accepted',
         ]);
 
         if ($validator->fails()) {
@@ -43,6 +44,14 @@ class AuthController extends Controller
             'telephone' => $request->telephone,
             'email_verified' => true,
         ]);
+
+        // Consentement donné à l'inscription (web) ; sinon il sera demandé à la première connexion.
+        if ($request->boolean('consentement')) {
+            $user->forceFill([
+                'consentement_at' => now(),
+                'consentement_version' => EvaluationController::VERSION_CONSENTEMENT,
+            ])->save();
+        }
 
         // Créer le profil étudiant
         Etudiant::create([

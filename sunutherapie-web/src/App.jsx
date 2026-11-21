@@ -12,6 +12,8 @@ import Bibliotheque from './pages/Bibliotheque';
 import Forum from './pages/Forum';
 import Profil from './pages/Profil';
 import Appel from './pages/Appel';
+import Evaluation from './pages/Evaluation';
+import Consentement from './pages/Consentement';
 import PsyAccueil from './pages/psy/Accueil';
 import PsyDemandes from './pages/psy/Demandes';
 import PsyConsultations from './pages/psy/ConsultationsPsy';
@@ -38,6 +40,8 @@ function Invite({ children }) {
 function Espaces() {
   const { user } = useAuth();
   const psy = user?.role === 'psychologue';
+  // Un étudiant doit d'abord accepter le cadre (confidentialité et ses limites).
+  if (user?.role === 'etudiant' && !user.consentement_at) return <Consentement />;
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -57,6 +61,7 @@ function Espaces() {
         ) : (
           <>
             <Route path="rendez-vous" element={<RendezVous />} />
+            <Route path="evaluation" element={<Evaluation />} />
             <Route path="forum" element={<Forum />} />
           </>
         )}

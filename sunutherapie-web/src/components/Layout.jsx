@@ -6,6 +6,7 @@ import { Icon, initials } from './ui';
 const LIENS_ETUDIANT = [
   { to: '/', icon: 'home', label: 'Accueil', end: true },
   { to: '/rendez-vous', icon: 'calendar', label: 'Prendre rendez-vous' },
+  { to: '/evaluation', icon: 'heart', label: 'Faire le point' },
   { to: '/consultations', icon: 'users', label: 'Mes consultations' },
   { to: '/ressources', icon: 'file', label: 'Mes ressources' },
   { to: '/bibliotheque', icon: 'book', label: 'Bibliothèque' },

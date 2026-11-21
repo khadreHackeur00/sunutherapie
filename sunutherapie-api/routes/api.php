@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\NotePsyController;
 use App\Http\Controllers\Api\ForumController;
 use App\Http\Controllers\Api\BibliothequeController;
 use App\Http\Controllers\Api\PushTokenController;
+use App\Http\Controllers\Api\EvaluationController;
 
 
 // ─── Routes publiques ────────────────────────────────────────
@@ -31,6 +32,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/push-token', [PushTokenController::class, 'store']);
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::put('/profile', [AuthController::class, 'updateProfile']);
+    // ─── Consentement et évaluations (PHQ-9, GAD-7) ───
+    Route::post('/consentement', [EvaluationController::class, 'consentir']);
+    Route::middleware('check.role:etudiant')->group(function () {
+        Route::post('/evaluations', [EvaluationController::class, 'store']);
+        Route::get('/evaluations', [EvaluationController::class, 'mesEvaluations']);
+    });
+    Route::get('/etudiants/{id}/evaluations', [EvaluationController::class, 'evaluationsEtudiant'])
+        ->middleware('check.role:psychologue');
     // ─── Assistant IA (orientation étudiant) ───
     Route::post('/assistant/chat', [\App\Http\Controllers\Api\AssistantController::class, 'chat']);
     // ─── Psychothérapeutes ───

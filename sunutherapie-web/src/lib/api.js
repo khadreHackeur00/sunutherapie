@@ -91,6 +91,10 @@ export const getConsultations = async () =>
   list(await request('/consultations/historique/etudiant'), 'consultations');
 export const creerConsultation = (payload) =>
   request('/consultations', { method: 'POST', body: payload });
+export const donnerConsentement = () => request('/consentement', { method: 'POST', body: { accepte: true } });
+export const envoyerEvaluation = (type, reponses) => request('/evaluations', { method: 'POST', body: { type, reponses } });
+export const getMesEvaluations = async () => list(await request('/evaluations'));
+export const getEvaluationsEtudiant = async (etudiantId) => list(await request(`/etudiants/${etudiantId}/evaluations`));
 export const getVideoToken = (id) => request(`/consultations/${id}/video-token`);
 export const noterConsultation = (id, note, commentaire) =>
   request(`/consultations/${id}/noter`, { method: 'POST', body: { note, commentaire } });
