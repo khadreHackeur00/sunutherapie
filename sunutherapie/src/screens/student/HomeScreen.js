@@ -7,7 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, spacing, radius, shadows } from '../../config/theme';
-import { apiGetPsychotherapeutesDisponibles, apiGetConsultationsEtudiant } from '../../services/api';
+import { apiGetPsychotherapeutesDisponibles, apiGetConsultationsEtudiant, apiProchaineEvaluation } from '../../services/api';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   Card, Avatar, Badge, SectionHeader, EmptyState, QuickAction, Button,
 } from '../../components/ui';
@@ -33,6 +34,12 @@ export default function HomeScreen({ navigation }) {
   const [consultations, setConsultations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [aRefaire, setARefaire] = useState(false);
+
+  // Rappel de réévaluation, revérifié à chaque retour sur l'accueil.
+  useFocusEffect(React.useCallback(() => {
+    apiProchaineEvaluation().then((r) => setARefaire(!!r?.data?.a_faire && !!r?.data?.derniere_at)).catch(() => {});
+  }, []));
 
   useEffect(() => { loadData(); }, []);
 
@@ -141,11 +148,11 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         {/* Faire le point (PHQ-9 / GAD-7) */}
-        <Card style={styles.pointCard} onPress={() => navigation.navigate('Evaluation')}>
+        <Card style={[styles.pointCard, aRefaire && styles.pointCardRappel]} onPress={() => navigation.navigate('Evaluation')}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
             <View style={styles.pointIcon}><Ionicons name="heart-outline" size={22} color={colors.primary} /></View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.pointTitre}>Faire le point</Text>
+              <Text style={styles.pointTitre}>{aRefaire ? "C'est le moment de refaire le point" : 'Faire le point'}</Text>
               <Text style={styles.pointSous}>2 minutes pour savoir comment vous allez</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={colors.textFaint} />
@@ -276,6 +283,7 @@ const styles = StyleSheet.create({
 
   actionsRow: { flexDirection: 'row', gap: spacing.sm, paddingHorizontal: spacing.lg, marginTop: spacing.lg },
   pointCard: { marginHorizontal: spacing.lg, marginTop: spacing.xl },
+  pointCardRappel: { borderWidth: 1.5, borderColor: colors.primary },
   pointIcon: { width: 42, height: 42, borderRadius: 12, backgroundColor: colors.primaryLight, alignItems: 'center', justifyContent: 'center' },
   pointTitre: { fontSize: 16, fontWeight: '700', color: colors.text },
   pointSous: { fontSize: 13, color: colors.textMuted, marginTop: 2 },

@@ -10,6 +10,9 @@ export default function Home() {
   const [consultations, setConsultations] = useState(null);
   const [psys, setPsys] = useState(null);
   const [erreur, setErreur] = useState(null);
+  const [prochaine, setProchaine] = useState(null);
+
+  useEffect(() => { api.getProchaineEvaluation().then(setProchaine).catch(() => {}); }, []);
 
   useEffect(() => {
     let annule = false;
@@ -49,6 +52,16 @@ export default function Home() {
         <h1 className="serif">Bonjour {prenom} 👋</h1>
         <p>Voici où vous en êtes aujourd'hui.</p>
       </div>
+
+      {prochaine?.a_faire ? (
+        <Link to="/evaluation" className="card point-carte">
+          <Icon name="heart" size={22} />
+          <div>
+            <b>{prochaine.derniere_at ? "C'est le moment de refaire le point" : 'Faites le point en 2 minutes'}</b>
+            <span>{prochaine.derniere_at ? 'Deux questionnaires courts pour voir comment vous allez en ce moment.' : 'Deux questionnaires courts pour vous proposer le soutien le plus adapté.'}</span>
+          </div>
+        </Link>
+      ) : null}
 
       {erreur ? <div className="alert alert-error">{erreur}</div> : null}
 

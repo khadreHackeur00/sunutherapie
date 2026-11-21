@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('check.role:etudiant')->group(function () {
         Route::post('/evaluations', [EvaluationController::class, 'store']);
         Route::get('/evaluations', [EvaluationController::class, 'mesEvaluations']);
+        Route::get('/evaluations/prochaine', [EvaluationController::class, 'prochaine']);
     });
     Route::middleware('check.role:psychologue')->group(function () {
         Route::get('/etudiants/{id}/evaluations', [EvaluationController::class, 'evaluationsEtudiant']);

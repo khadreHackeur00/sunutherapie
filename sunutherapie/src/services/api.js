@@ -211,3 +211,9 @@ export const apiPrendreEnChargeAlerte = async (id, note) => {
   });
   return response.json();
 };
+
+export const apiProchaineEvaluation = async () => {
+  const headers = await getHeaders();
+  const response = await fetch(`${API_URL}/evaluations/prochaine`, { headers: { ...headers, Accept: 'application/json' } });
+  return response.json();
+};

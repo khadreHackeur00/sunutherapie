@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import * as api from '../lib/api';
 import { Skeletons, formatDate } from '../components/ui';
 import { CHOIX, QUESTIONNAIRES, SEVERITE, NIVEAUX, URGENCES } from '../lib/evaluation';
+import CourbeScores from '../components/CourbeScores';
 
 export default function Evaluation() {
   const [type, setType] = useState(null);
   const [resultat, setResultat] = useState(null);
   const [historique, setHistorique] = useState(null);
+  const [prochaine, setProchaine] = useState(null);
 
-  const charger = () => api.getMesEvaluations().then(setHistorique).catch(() => setHistorique([]));
+  const charger = () => {
+    api.getMesEvaluations().then(setHistorique).catch(() => setHistorique([]));
+    api.getProchaineEvaluation().then(setProchaine).catch(() => {});
+  };
   useEffect(() => { charger(); }, []);
 
   const termine = (r) => { setResultat(r); setType(null); charger(); };
@@ -20,6 +25,14 @@ export default function Evaluation() {
         <h1 className="serif">Faire le point</h1>
         <p>Deux questionnaires courts pour savoir comment vous allez et vous proposer le soutien le plus adapté. Vos réponses restent confidentielles.</p>
       </div>
+
+      {!resultat && !type && prochaine?.derniere_at ? (
+        prochaine.a_faire ? (
+          <div className="alert eval-rappel">C'est le moment de refaire le point : votre dernier questionnaire date du {formatDate(prochaine.derniere_at, { avecHeure: false })}.</div>
+        ) : (
+          <p className="eval-prochaine">Prochain point conseillé à partir du {formatDate(prochaine.a_faire_le, { avecHeure: false })}. Vous pouvez aussi le refaire avant si vous en ressentez le besoin.</p>
+        )
+      ) : null}
 
       {resultat ? <Resultat r={resultat} onFermer={() => setResultat(null)} /> : null}
 
@@ -38,6 +51,7 @@ export default function Evaluation() {
 
       <div className="card" style={{ marginTop: 22 }}>
         <div className="card-h"><h2>Mes résultats</h2></div>
+        {historique && historique.length > 1 ? <CourbeScores evaluations={historique} /> : null}
         {historique === null ? <Skeletons n={2} />
           : historique.length === 0 ? <p className="eval-vide">Aucun questionnaire pour l'instant.</p>
           : historique.map((e) => (

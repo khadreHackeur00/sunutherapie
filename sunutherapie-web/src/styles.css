@@ -304,3 +304,17 @@ img{max-width:100%;display:block}
 .alerte-form{flex:1 1 280px;display:flex;flex-direction:column;gap:8px}
 .alerte-form textarea{min-height:70px}
 .alerte-actions{display:flex;gap:8px;justify-content:flex-end}
+
+/* ─── Réévaluation ─── */
+.eval-rappel{background:var(--accentLight);color:var(--ink);margin-bottom:16px}
+.eval-prochaine{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+.point-carte{display:flex;gap:14px;align-items:center;margin-bottom:18px;border:1px solid var(--primary);color:var(--primaryDark)}
+.point-carte b{display:block;color:var(--ink)}
+.point-carte span{font-size:13.5px;color:var(--muted)}
+.courbe{margin:4px 0 14px}
+.courbe svg{width:100%;height:auto;display:block}
+.courbe-grille{stroke:var(--border);stroke-width:1}
+.courbe-axe{font-size:11px;fill:var(--faint)}
+.courbe-legende{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:4px}
+.courbe-legende i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.courbe-note{margin-left:auto;color:var(--faint)}

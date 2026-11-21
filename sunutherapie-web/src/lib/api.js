@@ -93,6 +93,7 @@ export const creerConsultation = (payload) =>
   request('/consultations', { method: 'POST', body: payload });
 export const donnerConsentement = () => request('/consentement', { method: 'POST', body: { accepte: true } });
 export const envoyerEvaluation = (type, reponses) => request('/evaluations', { method: 'POST', body: { type, reponses } });
+export const getProchaineEvaluation = async () => (await request('/evaluations/prochaine')).data || null;
 export const getMesEvaluations = async () => list(await request('/evaluations'));
 export const getEvaluationsEtudiant = async (etudiantId) => list(await request(`/etudiants/${etudiantId}/evaluations`));
 export const getAlertes = async () => list(await request('/alertes'));

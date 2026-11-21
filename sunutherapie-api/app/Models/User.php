@@ -37,6 +37,8 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
         'verification_expires_at' => 'datetime',
         'email_verified' => 'boolean',
+        'consentement_at' => 'datetime',
+        'rappel_evaluation_at' => 'datetime',
         'password' => 'hashed',
     ];
 
@@ -55,6 +57,11 @@ class User extends Authenticatable implements FilamentUser
     public function etudiant()
     {
         return $this->hasOne(Etudiant::class);
+    }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
     }
 
     public function consultationsEtudiant()

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../../lib/api';
 import { Icon, Skeletons, Empty, Modal, initials, formatDate, statutBadge } from '../../components/ui';
 import { QUESTIONNAIRES, SEVERITE, NIVEAUX } from '../../lib/evaluation';
+import CourbeScores from '../../components/CourbeScores';
 
 const FILTRES = [
   { k: 'toutes', label: 'Toutes' },
@@ -126,6 +127,7 @@ function EvaluationsEtudiant({ etudiantId, nom, onClose }) {
   return (
     <Modal title={`Évaluations de ${nom}`} sub="Questionnaires PHQ-9 et GAD-7 remplis par l'étudiant. Le niveau est une proposition à valider en entretien." onClose={onClose}>
       {erreur ? <div className="alert alert-error">{erreur}</div> : null}
+      {liste && liste.length > 1 ? <CourbeScores evaluations={liste} /> : null}
       {liste === null ? <Skeletons n={2} />
         : liste.length === 0 ? <p className="eval-vide">L'étudiant n'a encore rempli aucun questionnaire.</p>
         : liste.map((e) => (

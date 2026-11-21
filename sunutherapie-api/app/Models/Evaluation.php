@@ -17,6 +17,33 @@ class Evaluation extends Model
 
     public const QUESTIONS = ['phq9' => 9, 'gad7' => 7];
 
+    /**
+     * Délai avant de refaire le point, selon le dernier niveau proposé (en jours).
+     * Plus la gêne est forte, plus le suivi est rapproché. À valider par l'équipe clinique.
+     */
+    public const DELAIS_REEVALUATION = [1 => 56, 2 => 28, 3 => 14, 4 => 7];
+
+    /** Prochaine évaluation conseillée pour un étudiant. */
+    public static function prochaine(int $userId): array
+    {
+        $derniere = static::where('user_id', $userId)->latest()->latest('id')->first();
+
+        if (! $derniere) {
+            return ['derniere_at' => null, 'niveau' => null, 'delai_jours' => null, 'a_faire_le' => null, 'a_faire' => true];
+        }
+
+        $delai = self::DELAIS_REEVALUATION[$derniere->niveau_propose] ?? 28;
+        $due = $derniere->created_at->copy()->addDays($delai);
+
+        return [
+            'derniere_at' => $derniere->created_at,
+            'niveau' => $derniere->niveau_propose,
+            'delai_jours' => $delai,
+            'a_faire_le' => $due,
+            'a_faire' => now()->greaterThanOrEqualTo($due),
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -61,6 +61,12 @@ class EvaluationController extends Controller
         return response()->json(['success' => true, 'data' => $evaluation], 201);
     }
 
+    // ─── Prochaine évaluation conseillée (étudiant) ───
+    public function prochaine(Request $request)
+    {
+        return response()->json(['success' => true, 'data' => Evaluation::prochaine($request->user()->id)]);
+    }
+
     // ─── Mes évaluations (étudiant) ───
     public function mesEvaluations(Request $request)
     {
